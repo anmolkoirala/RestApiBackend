@@ -37,8 +37,15 @@ router.post('/user/login', (req, res, next) => {
                             err.status = 400;
                             return next(err);
                         }
-                        let token = jwt.sign({ _id: usr._id }, process.env.SECRET);
-                        res.json({ userStatus: 'User Log In Success!', token: token});
+                        let token = jwt.sign({ _id: usr._id }, process.env.SECRET,{
+                                expiresIn: 60 * 60 * 24
+                        });
+                        const userinfos ={
+                            id: usr._id, fullname: usr.fullname, eml: usr.email
+                            ,contact: usr.contactnum,
+                            address: usr.address, adminrole: usr.admin
+                        }
+                        res.json({ userStatus: 'User Log In Success!', token: token, logininfo: userinfos });
                     }).catch(next);
             }
         }).catch(next);
