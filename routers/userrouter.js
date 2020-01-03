@@ -36,7 +36,8 @@ router.post('/user/login', (req, res, next) => {
                             err.status = 400;
                             return next(err);
                         }
-                        res.json({ userStatus: 'User Log In Success!' });
+                        let token = jwt.sign({ _id: usr._id }, process.env.SECRET);
+                        res.json({ userStatus: 'User Log In Success!', token: token});
                     }).catch(next);
             }
         }).catch(next);
