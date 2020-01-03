@@ -20,4 +20,26 @@ router.post("/user/registration",(req, res) => {
     });
 });
 
+//User login
+router.post('/user/login', (req, res, next) => {
+    user.findOne({ email: req.body.email })
+        .then((usr) => {
+            if (usr == null) {
+                let err = new Error('404: User credentials found!');
+                err.status = 401;
+                return next(err);
+            } else {
+                bcrypt.compare(req.body.password, usr.password)
+                    .then((isMatch) => {
+                        if (!isMatch) {
+                            let err = new Error('ERROR: Incorrect Password. Please try again!');
+                            err.status = 400;
+                            return next(err);
+                        }
+                        res.json({ userStatus: 'User Log In Success!' });
+                    }).catch(next);
+            }
+        }).catch(next);
+});
+
 module.exports = router;
