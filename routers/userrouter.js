@@ -4,6 +4,7 @@ const router = new express.Router;
 const bcrypt = require('bcrypt');
 const app = express();
 const jwt = require('jsonwebtoken');
+const auth = require('../authfile/auth');
 
 //user registration
 router.post("/user/registration",(req, res) => {
@@ -22,7 +23,7 @@ router.post("/user/registration",(req, res) => {
 });
 
 //admin user registration
-router.post("/admin/registration",(req, res) => {
+router.post("/admin/registration",auth.verifyUser, auth.verifyAdmin,(req, res) => {
     //changed values
     req.body.password = bcrypt.hashSync(req.body.password, 10);
     req.body.admin = true;
