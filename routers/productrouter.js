@@ -55,6 +55,36 @@ router.get('/products',auth.verifyUser,(req,res)=>{
     });
 });
 
+//update for product
+router.put('/products/:id',auth.verifyUser,auth.verifyAdmin,(req,res)=>{
+    product.findByIdAndUpdate({_id:req.params.id},req.body).then(function(){
+         console.log(res.body);
+         res.status(200).json({successmsg:"Product Updated Successfully"});
+    }).catch(function(e){
+         res.send(e)
+    });
+});
+
+//product delete
+router.delete('/products/:id',auth.verifyUser, auth.verifyAdmin,(req,res)=>{
+    product.findOne({_id:req.params.id}).then(function(found){
+        const filedes= "./public/productuploads/"+found.image;
+        fs.unlink(filedes, function (err) {
+            if (err) {
+                console.log(err);
+            }else{
+                product.findByIdAndDelete(found.id).then(function(){
+                    res.status(200).json({successmsg:"Product Deleted Successfully"});
+                 }).catch(function(e){
+                     res.status(402).json({errmsg:"Product Could not be deleted."});
+                 });
+            }
+        });
+    }).catch(function(e){
+        res.send(e)
+});
+
+});
 
 
 
