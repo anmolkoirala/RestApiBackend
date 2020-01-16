@@ -8,7 +8,7 @@ const dotenv = require('dotenv').config();
 const app = express();
 const user = require('./routers/userrouter');
 const product = require('./routers/productrouter');
-
+const userrequests = require('./routers/userrequestrouter');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -18,5 +18,6 @@ app.use(express.json());
 app.use(express.static(__dirname + '/public'));
 app.use(user);
 app.use(product);
+app.use(userrequests);
 
 app.listen(4000);
