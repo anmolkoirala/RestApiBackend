@@ -59,5 +59,24 @@ router.put('/request/:id',auth.verifyUser,(req,res)=>{
     });
 });
 
+//updated by admin
+router.put('/admin/request/:id',auth.verifyUser,auth.verifyAdmin,(req,res)=>{
+    userrequest.findByIdAndUpdate({_id:req.params.id},req.body).then(function(){
+         console.log(res.body);
+         res.status(200).json({successmsg:"Response Sent"});
+    }).catch(function(e){
+         res.send(e)
+    });
+});
+
+
+//delete a request
+router.delete('/request/:id',auth.verifyUser,(req,res)=>{
+    userrequest.findByIdAndDelete(req.params.id).then(function(){
+          res.status(200).json({successmsg:"Your request has been canceled"});
+        }).catch(function(e){
+            res.status(402).json({errmsg:"Request could not be canceled."});
+        });
+});
 
 module.exports = router;
