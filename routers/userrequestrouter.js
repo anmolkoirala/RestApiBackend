@@ -39,4 +39,25 @@ router.get('/request',auth.verifyUser, auth.verifyAdmin,(req,res)=>{
 });
 
 
+//find request as per request id
+router.get('/request/:id',auth.verifyUser,(req,res)=>{
+    console.log(req.params.id);
+    userrequest.findOne({_id:req.params.id}).then(function(req){
+         res.json(req);
+    }).catch(function(e){
+            res.json(e);
+    });
+});
+
+//updated by user
+router.put('/request/:id',auth.verifyUser,(req,res)=>{
+    console.log(req.body);
+    userrequest.findByIdAndUpdate({_id:req.params.id},req.body).then(function(){
+         res.status(200).json({successmsg:"Request Updated."});
+    }).catch(function(e){
+         res.send(e)
+    });
+});
+
+
 module.exports = router;
