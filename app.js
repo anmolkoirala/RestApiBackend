@@ -9,6 +9,7 @@ const app = express();
 const user = require('./routers/userrouter');
 const product = require('./routers/productrouter');
 const userrequests = require('./routers/userrequestrouter');
+const cart = require('./routers/cartrouter');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -19,5 +20,6 @@ app.use(express.static(__dirname + '/public'));
 app.use(user);
 app.use(product);
 app.use(userrequests);
+app.use(cart);
 
 app.listen(4000);
