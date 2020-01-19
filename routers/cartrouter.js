@@ -20,5 +20,15 @@ router.post("/carts",auth.verifyUser,(req, res) => {
         });
 });
 
+//cartdisplay
+router.get('/carts/:id',auth.verifyUser,(req,res)=>{
+    cart.find({addedbyID:req.params.id}).then(function(carts){
+         res.json(carts);
+    }).catch(function(e){
+            res.json(e);
+    });
+});
+
+
 
 module.exports = router;
