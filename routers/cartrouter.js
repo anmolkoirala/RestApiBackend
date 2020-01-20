@@ -30,5 +30,15 @@ router.get('/carts/:id',auth.verifyUser,(req,res)=>{
 });
 
 
+//cart update
+router.put('/carts/:id',auth.verifyUser,(req,res)=>{
+    console.log(req.body);
+    cart.findByIdAndUpdate({_id:req.params.id},req.body).then(function(){
+         res.status(200).json({successmsg:"Cart updated"});
+    }).catch(function(e){
+         res.send(e)
+    });
+});
+
 
 module.exports = router;
