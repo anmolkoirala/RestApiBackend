@@ -39,6 +39,16 @@ router.put('/carts/:id',auth.verifyUser,(req,res)=>{
          res.send(e)
     });
 });
+//cartdelete
+router.delete('/carts/:id',auth.verifyUser,(req,res)=>{
+    cart.findByIdAndDelete(req.params.id).then(function(){
+          res.status(200).json({successmsg:"Product Removed from Cart"});
+        }).catch(function(e){
+            res.status(402).json({errmsg:"Product Removal failed."});
+        });
+});
+
+
 
 
 module.exports = router;
