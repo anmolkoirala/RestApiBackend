@@ -48,7 +48,14 @@ router.delete('/carts/:id',auth.verifyUser,(req,res)=>{
         });
 });
 
-
+//android delete all on shake
+router.delete('/empty/carts/:addedbyID',auth.verifyUser,(req,res)=>{
+    cart.deleteMany({addedbyID:req.params.addedbyID}).then(function(){
+          res.status(200).json({successmsg:"All cart items removed"});
+        }).catch(function(e){
+            res.status(402).json({errmsg:"Products could not be removed"});
+    });
+});
 
 
 module.exports = router;
