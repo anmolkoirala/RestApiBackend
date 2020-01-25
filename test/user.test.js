@@ -21,3 +21,26 @@ afterAll(async () => {
 });
 
 
+describe('User Schema testing', () => {
+    // the code below is for insert testing
+        it('Add user', () => {
+            const user = {
+                'fullname': 'Anmol23 Koirala',
+                'email': 'anmol323@gmail.com',
+                'password': 'anmol23',
+                'contactnum': '9467516994',
+                'address': 'Jhapa',
+                };
+
+
+
+            return User.create(user)
+                .then((pro_ret) => {
+                    expect(pro_ret.email).toEqual("anmol323@gmail.com");
+                });
+        });
+
+
+
+
+})
