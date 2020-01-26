@@ -53,5 +53,15 @@ describe('User Schema testing', () => {
             expect(status.ok).toBe(1);
         })
 
+    // to update user
+  it('to test the user update', async () => {
+
+        return User.findOneAndUpdate({_id :Object('5e48154cbb135629216a4d2a')}, {$set : {fullname:"Anmol Koirala"}})
+        .then((pp)=>{
+            expect(pp.fullname).toEqual("Anmol Koirala")
+        })
+
+    });
+
 
 })
