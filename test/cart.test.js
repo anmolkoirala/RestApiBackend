@@ -44,5 +44,15 @@ describe('User Cart Schema testing', () => {
         });
 
 
+    // delete individual cart by id
+        it('to test the delete cart is working or not', async () => {
+            const status = await UserCart.deleteOne({_id :Object('5e48154cbb135629216a4d2a')});
+            expect(status.ok).toBe(1);
+        })
+
+
+
+
+
 
 })
