@@ -51,6 +51,14 @@ describe('User Cart Schema testing', () => {
         })
 
 
+       // delete all user cart list
+        it('to test the delete cart is working or not', async () => {
+            const status = await UserCart.deleteMany();
+            expect(status.ok).toBe(1);
+        })
+
+
+      
 
 
 
