@@ -58,9 +58,17 @@ describe('User Cart Schema testing', () => {
         })
 
 
-      
+        // update user cart detail
+    it('to test the cart update', async () => {
 
+        return UserCart.findOneAndUpdate({_id :Object('5e4813813ae83827ebc2825d')}, {$set : {productnumber:8}})
+        .then((pp)=>{
+            expect(pp.productnumber).toEqual(8)
+        })
 
+    });
+
+    
 
 
 })
