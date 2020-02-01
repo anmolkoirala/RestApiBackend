@@ -68,7 +68,14 @@ describe('User Cart Schema testing', () => {
 
     });
 
-    
+
+ // select all list
+     it('to test the select all user cart is working or not', async () => {
+        const status = await UserCart.find({});
+        expect(status.length).toBeGreaterThan(0);
+    })
+
+
 
 
 })
